@@ -21,30 +21,38 @@ public class PoliceProblemApplication implements CommandLineRunner {
     public void run(String... args) {
 
         final Map<String, Integer> results = new HashMap<>();
-        results.put("EagerStrategy", 0);
-        int allRun = 10_000;
+        int allRunCount = 10_000;
+        int robbersCount = 5;
 
-        int allRobbersCount = 5;
+        var eagerOfficer = new Officer(new EagerStrategy(), robbersCount);
 
-        for (int i = 0; i < allRun; i++) {
-            var building = Building.ofSize(allRobbersCount);
-
-            var eagerOfficer = new Officer(new EagerStrategy(), allRobbersCount);
-
-            while (!building.robbers().isEmpty()) {
-                var robber = building.robberLeave();
-                var intercept = eagerOfficer.intercept(robber);
-
-                if (intercept) {
-                    if (robber.equals(building.leader())) {
-                        var currentSuccessCount = results.get("EagerStrategy");
-                        results.put("EagerStrategy", ++currentSuccessCount);
-                    }
-                    break;
-                }
-            }
-        }
+        results.put("EagerStrategy", executeSuit(robbersCount, eagerOfficer, allRunCount));
 
         System.out.println(results);
+    }
+
+    private int executeSuit(int robbersCount, Officer officer, int allRunCount) {
+        int successCount = 0;
+        for (int i = 0; i < allRunCount; i++) {
+            var result = execute(robbersCount, officer);
+            if (result) {
+                successCount++;
+            }
+        }
+        return successCount;
+    }
+
+    private boolean execute(int robbersCount, Officer officer) {
+        var building = Building.ofSize(robbersCount);
+
+        while (!building.robbers().isEmpty()) {
+            var robber = building.robberLeave();
+            var intercept = officer.intercept(robber);
+
+            if (intercept) {
+                return robber.equals(building.leader());
+            }
+        }
+        return false; //lazy officer does not intercept anyone
     }
 }
