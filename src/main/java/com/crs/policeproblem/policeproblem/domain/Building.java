@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @Component
 public class Building {
     private final Set<Integer> robbers = new HashSet<>();
+    private Integer leader;
 
     private Building() {
     }
@@ -20,6 +21,7 @@ public class Building {
     public static Building of(Integer... robbers) {
         var building = new Building();
         building.robbers.addAll(Arrays.asList(robbers));
+        building.leader = Collections.max(building.robbers);
 
         return building;
     }
@@ -29,6 +31,8 @@ public class Building {
         while (building.robbers.size() < size) {
             building.addRobber(ThreadLocalRandom.current().nextInt(160, 201));
         }
+
+        building.leader = Collections.max(building.robbers);
         return building;
     }
 
@@ -50,5 +54,9 @@ public class Building {
 
     private void addRobber(Integer robber) {
         robbers.add(robber);
+    }
+
+    public Integer leader() {
+        return leader;
     }
 }
