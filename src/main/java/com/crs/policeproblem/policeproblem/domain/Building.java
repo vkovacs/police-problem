@@ -2,10 +2,13 @@ package com.crs.policeproblem.policeproblem.domain;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class Building {
@@ -23,5 +26,17 @@ public class Building {
 
     public Set<Integer> robbers() {
         return Collections.unmodifiableSet(robbers);
+    }
+
+    public Integer robberLeave() {
+        if (robbers.isEmpty()) {
+            throw new IllegalArgumentException("The building is empty!");
+        }
+
+        List<Integer> robberList = new ArrayList<>(robbers);
+        var randomRobber = robberList.get(ThreadLocalRandom.current().nextInt(0, robbers.size()));
+
+        robbers.remove(randomRobber);
+        return randomRobber;
     }
 }
