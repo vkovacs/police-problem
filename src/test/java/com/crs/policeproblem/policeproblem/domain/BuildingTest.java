@@ -52,4 +52,10 @@ class BuildingTest {
         Exception exception = Assertions.assertThrows(IllegalArgumentException.class, building::robberLeave);
         assertThat(exception.getMessage(), is("The building is empty!"));
     }
+
+    @Test
+    void shouldGenerateRandomBuilding() {
+        var building = Building.ofSize(5);
+        assertThat(building.robbers(), hasSize(5));
+    }
 }

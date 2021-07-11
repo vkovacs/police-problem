@@ -24,6 +24,14 @@ public class Building {
         return building;
     }
 
+    public static Building ofSize(int size) {
+        var building = new Building();
+        while (building.robbers.size() < size) {
+            building.addRobber(ThreadLocalRandom.current().nextInt(160, 201));
+        }
+        return building;
+    }
+
     public Set<Integer> robbers() {
         return Collections.unmodifiableSet(robbers);
     }
@@ -38,5 +46,9 @@ public class Building {
 
         robbers.remove(randomRobber);
         return randomRobber;
+    }
+
+    private void addRobber(Integer robber) {
+        robbers.add(robber);
     }
 }
