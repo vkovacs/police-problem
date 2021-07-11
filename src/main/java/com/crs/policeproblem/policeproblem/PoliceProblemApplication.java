@@ -2,8 +2,9 @@ package com.crs.policeproblem.policeproblem;
 
 import com.crs.policeproblem.policeproblem.domain.Building;
 import com.crs.policeproblem.policeproblem.domain.Officer;
-import com.crs.policeproblem.policeproblem.strategy.EagerStrategy;
 import com.crs.policeproblem.policeproblem.strategy.CatchFirstWhichIsTallerThanPreviousStrategy;
+import com.crs.policeproblem.policeproblem.strategy.EagerStrategy;
+import com.crs.policeproblem.policeproblem.strategy.TallerThenAverageAfterHalfwayStrategy;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,8 +29,11 @@ public class PoliceProblemApplication implements CommandLineRunner {
         var eagerOfficer = new Officer(new EagerStrategy(), robbersCount);
         results.put("EagerStrategy", executeSuit(robbersCount, eagerOfficer, allRunCount));
 
-        var catchFirstWhichIsTallerThanPreviousStrategy = new Officer(new CatchFirstWhichIsTallerThanPreviousStrategy(), robbersCount);
-        results.put("CatchFirstWhichIsTallerThanPreviousStrategy", executeSuit(robbersCount, catchFirstWhichIsTallerThanPreviousStrategy, allRunCount));
+        var firstWhichIsTallerThanPreviousStrategyOfficer = new Officer(new CatchFirstWhichIsTallerThanPreviousStrategy(), robbersCount);
+        results.put("FirstWhichIsTallerThanPreviousStrategy", executeSuit(robbersCount, firstWhichIsTallerThanPreviousStrategyOfficer, allRunCount));
+
+        var tallerThenAverageAfterHalfwayStrategyOfficer = new Officer(new TallerThenAverageAfterHalfwayStrategy(), robbersCount);
+        results.put("TallerThenAverageAfterHalfwayStrategy", executeSuit(robbersCount, tallerThenAverageAfterHalfwayStrategyOfficer, allRunCount));
 
         System.out.println(results);
     }
