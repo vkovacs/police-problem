@@ -4,9 +4,14 @@ import com.crs.policeproblem.policeproblem.domain.InterceptStrategy;
 
 import java.util.List;
 
-public class EagerStrategy implements InterceptStrategy {
+public class SkipFirstCatchFirstTallerStrategy implements InterceptStrategy {
     @Override
     public boolean intercept(Integer robber, List<Integer> leftRobbers, int allRobbersCount) {
-        return true;
+        if (leftRobbers.isEmpty()) {
+            return false;
+        }
+        var previousRobber = leftRobbers.get(leftRobbers.size() - 1);
+
+        return robber > previousRobber;
     }
 }

@@ -3,6 +3,7 @@ package com.crs.policeproblem.policeproblem;
 import com.crs.policeproblem.policeproblem.domain.Building;
 import com.crs.policeproblem.policeproblem.domain.Officer;
 import com.crs.policeproblem.policeproblem.strategy.EagerStrategy;
+import com.crs.policeproblem.policeproblem.strategy.SkipFirstCatchFirstTallerStrategy;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,8 +26,10 @@ public class PoliceProblemApplication implements CommandLineRunner {
         int robbersCount = 5;
 
         var eagerOfficer = new Officer(new EagerStrategy(), robbersCount);
-
         results.put("EagerStrategy", executeSuit(robbersCount, eagerOfficer, allRunCount));
+
+        var skipFirstCatchFirstTallerOfficer = new Officer(new SkipFirstCatchFirstTallerStrategy(), robbersCount);
+        results.put("SkipFirstCatchFirstTallerStrategy", executeSuit(robbersCount, skipFirstCatchFirstTallerOfficer, allRunCount));
 
         System.out.println(results);
     }

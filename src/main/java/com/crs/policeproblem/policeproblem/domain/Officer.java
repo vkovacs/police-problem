@@ -13,7 +13,7 @@ public class Officer {
 
 
     public boolean intercept(Integer robber) {
-        var intercept = interceptStrategy.intercept(leftRobbers, allRobbersCount);
+        var intercept = interceptStrategy.intercept(robber, leftRobbers, allRobbersCount);
 
         if (!intercept) {
             leftRobbers.add(robber);
