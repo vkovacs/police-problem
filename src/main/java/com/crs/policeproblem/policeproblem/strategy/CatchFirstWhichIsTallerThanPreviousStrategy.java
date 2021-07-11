@@ -4,7 +4,7 @@ import com.crs.policeproblem.policeproblem.domain.InterceptStrategy;
 
 import java.util.List;
 
-public class SkipFirstCatchFirstTallerStrategy implements InterceptStrategy {
+public class CatchFirstWhichIsTallerThanPreviousStrategy implements InterceptStrategy {
     @Override
     public boolean intercept(Integer robber, List<Integer> leftRobbers, int allRobbersCount) {
         if (leftRobbers.isEmpty()) {

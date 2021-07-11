@@ -3,7 +3,7 @@ package com.crs.policeproblem.policeproblem;
 import com.crs.policeproblem.policeproblem.domain.Building;
 import com.crs.policeproblem.policeproblem.domain.Officer;
 import com.crs.policeproblem.policeproblem.strategy.EagerStrategy;
-import com.crs.policeproblem.policeproblem.strategy.SkipFirstCatchFirstTallerStrategy;
+import com.crs.policeproblem.policeproblem.strategy.CatchFirstWhichIsTallerThanPreviousStrategy;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,14 +22,14 @@ public class PoliceProblemApplication implements CommandLineRunner {
     public void run(String... args) {
 
         final Map<String, Integer> results = new HashMap<>();
-        int allRunCount = 10_000;
-        int robbersCount = 5;
+        int allRunCount = 100_000;
+        int robbersCount = 30;
 
         var eagerOfficer = new Officer(new EagerStrategy(), robbersCount);
         results.put("EagerStrategy", executeSuit(robbersCount, eagerOfficer, allRunCount));
 
-        var skipFirstCatchFirstTallerOfficer = new Officer(new SkipFirstCatchFirstTallerStrategy(), robbersCount);
-        results.put("SkipFirstCatchFirstTallerStrategy", executeSuit(robbersCount, skipFirstCatchFirstTallerOfficer, allRunCount));
+        var catchFirstWhichIsTallerThanPreviousStrategy = new Officer(new CatchFirstWhichIsTallerThanPreviousStrategy(), robbersCount);
+        results.put("CatchFirstWhichIsTallerThanPreviousStrategy", executeSuit(robbersCount, catchFirstWhichIsTallerThanPreviousStrategy, allRunCount));
 
         System.out.println(results);
     }
