@@ -3,6 +3,7 @@ package com.crs.policeproblem.policeproblem;
 import com.crs.policeproblem.policeproblem.domain.Building;
 import com.crs.policeproblem.policeproblem.domain.Officer;
 import com.crs.policeproblem.policeproblem.strategy.CatchFirstWhichIsTallerThanPreviousStrategy;
+import com.crs.policeproblem.policeproblem.strategy.DanielsStrategy;
 import com.crs.policeproblem.policeproblem.strategy.EagerStrategy;
 import com.crs.policeproblem.policeproblem.strategy.TallerThenAverageAfterHalfwayStrategy;
 import org.springframework.boot.CommandLineRunner;
@@ -23,8 +24,8 @@ public class PoliceProblemApplication implements CommandLineRunner {
     public void run(String... args) {
 
         final Map<String, Integer> results = new HashMap<>();
-        int allRunCount = 100_000;
-        int robbersCount = 30;
+        int allRunCount = 100;
+        int robbersCount = 100;
 
         var eagerOfficer = new Officer(new EagerStrategy(), robbersCount);
         results.put("EagerStrategy", executeSuit(robbersCount, eagerOfficer, allRunCount));
@@ -34,6 +35,9 @@ public class PoliceProblemApplication implements CommandLineRunner {
 
         var tallerThenAverageAfterHalfwayStrategyOfficer = new Officer(new TallerThenAverageAfterHalfwayStrategy(), robbersCount);
         results.put("TallerThenAverageAfterHalfwayStrategy", executeSuit(robbersCount, tallerThenAverageAfterHalfwayStrategyOfficer, allRunCount));
+
+        var danielOfficer = new Officer(new DanielsStrategy(), robbersCount);
+        results.put("DanielsStrategy", executeSuit(robbersCount, danielOfficer, allRunCount));
 
         System.out.println(results);
     }

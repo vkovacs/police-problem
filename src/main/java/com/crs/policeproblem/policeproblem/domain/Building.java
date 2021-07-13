@@ -29,7 +29,7 @@ public class Building {
     public static Building ofSize(int size) {
         var building = new Building();
         while (building.robbers.size() < size) {
-            building.addRobber(ThreadLocalRandom.current().nextInt(150, 211));
+            building.addRobber(ThreadLocalRandom.current().nextInt(100, 300));
         }
 
         building.leader = Collections.max(building.robbers);
