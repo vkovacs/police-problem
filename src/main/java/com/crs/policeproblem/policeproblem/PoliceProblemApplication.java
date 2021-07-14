@@ -24,7 +24,7 @@ public class PoliceProblemApplication implements CommandLineRunner {
     public void run(String... args) {
 
         final Map<String, Integer> results = new HashMap<>();
-        int allRunCount = 100;
+        int allRunCount = 100_000;
         int robbersCount = 100;
 
         var eagerOfficer = new Officer(new EagerStrategy(), robbersCount);
