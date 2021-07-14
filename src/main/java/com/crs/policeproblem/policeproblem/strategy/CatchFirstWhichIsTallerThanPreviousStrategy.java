@@ -14,4 +14,9 @@ public class CatchFirstWhichIsTallerThanPreviousStrategy implements InterceptStr
 
         return robber > previousRobber;
     }
+
+    @Override
+    public void reset() {
+        //No implementation needed here.
+    }
 }

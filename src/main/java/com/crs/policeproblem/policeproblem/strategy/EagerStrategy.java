@@ -9,4 +9,9 @@ public class EagerStrategy implements InterceptStrategy {
     public boolean intercept(Integer robber, List<Integer> leftRobbers, int allRobbersCount) {
         return true;
     }
+
+    @Override
+    public void reset() {
+        //No implementation needed here.
+    }
 }

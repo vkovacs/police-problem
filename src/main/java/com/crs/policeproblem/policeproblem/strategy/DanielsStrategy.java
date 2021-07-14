@@ -15,8 +15,13 @@ public class DanielsStrategy implements InterceptStrategy {
             tallestRobber = robber;
         }
 
-        if (tallestRobberCount == leftRobbers.size() + 1) return true;
-
-        return tallestRobberCount == ((int) Math.log(allRobbersCount / 1.6) - 1);
+        return tallestRobberCount == (int) Math.round(Math.log(allRobbersCount / 1.6));
     }
+
+    @Override
+    public void reset() {
+        tallestRobberCount = 0;
+        tallestRobber = 0;
+    }
+
 }

@@ -13,4 +13,9 @@ public class TallerThenAverageAfterHalfwayStrategy implements InterceptStrategy 
         }
         return false;
     }
+
+    @Override
+    public void reset() {
+        //No implementation needed here.
+    }
 }

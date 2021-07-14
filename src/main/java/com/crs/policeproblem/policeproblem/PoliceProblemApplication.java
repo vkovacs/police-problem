@@ -25,7 +25,7 @@ public class PoliceProblemApplication implements CommandLineRunner {
 
         final Map<String, Integer> results = new HashMap<>();
         int allRunCount = 100_000;
-        int robbersCount = 100;
+        int robbersCount = 10;
 
         var eagerOfficer = new Officer(new EagerStrategy(), robbersCount);
         results.put("EagerStrategy", executeSuit(robbersCount, eagerOfficer, allRunCount));
@@ -54,6 +54,7 @@ public class PoliceProblemApplication implements CommandLineRunner {
     }
 
     private boolean execute(int robbersCount, Officer officer) {
+        officer.reset();
         var building = Building.ofSize(robbersCount);
 
         while (!building.robbers().isEmpty()) {
